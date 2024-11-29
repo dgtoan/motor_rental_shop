@@ -1,5 +1,5 @@
 import 'package:pocketbase/pocketbase.dart';
 
-class DAO {
+class PocketBaseService {
   final con = PocketBase('https://motor-rental-shop.pockethost.io/');
 }

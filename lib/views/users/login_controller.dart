@@ -5,7 +5,7 @@ import 'package:motor_rental_shop/services/session_storage_service.dart';
 import 'package:motor_rental_shop/views/widgets/app_alert.dart';
 
 class LoginController {
-  final UserDAO userDAO = UserDAO();
+  final UserRepository userDAO = UserRepository();
   Future<void> call(User user) async {
     final result = await userDAO.checkLogin(user);
 

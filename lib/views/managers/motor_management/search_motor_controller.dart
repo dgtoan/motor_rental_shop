@@ -4,7 +4,7 @@ import 'package:motor_rental_shop/repositories/motorbike_repository.dart';
 import 'package:motor_rental_shop/services/session_storage_service.dart';
 
 class SearchMotorController {
-  final MotorbikeDAO motorbikeDAO = MotorbikeDAO();
+  final MotorbikeRepository motorbikeDAO = MotorbikeRepository();
 
   Future<void> call(String motorSearchName) async {
     SessionStorageService.setMotorSearchName(motorSearchName);

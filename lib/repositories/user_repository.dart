@@ -5,7 +5,7 @@ import 'package:motor_rental_shop/repositories/pocketbase_service.dart';
 import 'package:motor_rental_shop/models/user.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-class UserDAO extends DAO {
+class UserRepository extends PocketBaseService {
   Future<Either<User, String>> checkLogin(User user) async {
     final email = user.email;
     final password = user.password;
