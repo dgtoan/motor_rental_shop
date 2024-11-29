@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motor_rental_shop/models/user_role.dart';
 import 'package:motor_rental_shop/repositories/pocketbase_service.dart';
 import 'package:motor_rental_shop/models/user.dart';
 
@@ -24,6 +25,7 @@ class UserDAO extends DAO {
     try {
       final body = user.toJson();
       body['passwordConfirm'] = user.password;
+      body['role'] = UserRole.manager.name;
       final record = await con.collection('users').create(body: body);
       return User.fromJson(record.data);
     } on Exception catch (e) {
