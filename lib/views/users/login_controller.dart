@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:motor_rental_shop/repositories/user_repository.dart';
 import 'package:motor_rental_shop/models/user.dart';
 
-class DoLogin {
+class LoginController {
   final UserDAO userDAO = UserDAO();
   Future<void> call(User user) async {
     final currentManager = await userDAO.checkLogin(user);
@@ -23,7 +23,8 @@ class DoLogin {
       return;
     }
 
-    window.sessionStorage['currentManager'] = jsonEncode(currentManager.toJson());
+    window.sessionStorage['currentManager'] =
+        jsonEncode(currentManager.toJson());
     Get.offNamed('/ManagerView.dart');
   }
 }

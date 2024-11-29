@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
-
-class DoSaveRevenue extends GetxController {
+class SaveRevenueController {
   Future<bool> call() async {
     return false;
   }

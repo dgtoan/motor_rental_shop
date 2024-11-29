@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motor_rental_shop/repositories/motorbike_repository.dart';
 
-class DoSearchMotor extends GetxController {
+class SearchMotorController {
   final MotorbikeDAO motorbikeDAO = MotorbikeDAO();
 
   Future<void> call(String motorSearchName) async {
@@ -25,8 +25,8 @@ class DoSearchMotor extends GetxController {
       return;
     }
 
-    window.sessionStorage['listSearchMotorbike'] = jsonEncode(listSearchMotorbike);
+    window.sessionStorage['listSearchMotorbike'] =
+        jsonEncode(listSearchMotorbike);
     Get.offNamed('/MotorManagementView.dart?motor=$motorSearchName');
   }
-  
 }

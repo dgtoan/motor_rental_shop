@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:motor_rental_shop/repositories/user_repository.dart';
 import 'package:motor_rental_shop/models/user.dart';
 
-class DoRegister {
+class RegisterController {
   final UserDAO userDAO = UserDAO();
 
   Future<void> call(User user) async {

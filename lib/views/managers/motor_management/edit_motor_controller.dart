@@ -1,8 +1,5 @@
-import 'package:get/get.dart';
-
-class DoEditMotor extends GetxController {
+class EditMotorController {
   Future<bool> call() async {
     return false;
   }
-  
 }

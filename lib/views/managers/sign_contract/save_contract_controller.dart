@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
-
-class DoSaveContract extends GetxController {
+class SaveContractController {
   Future<bool> call() async {
     return false;
   }
