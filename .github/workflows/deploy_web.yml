@@ -44,7 +44,7 @@ jobs:
           git config --global user.email toandv@zyyx.jp
           git config --global user.name zyyx-toandv
           git status
-          git remote add origin https://${{ secrets.GITHUB_TOKEN }}@github.com/dgtoan/motor_rental_shop.git
+          git remote add origin https://dgtoan:${{ secrets.GITHUB_TOKEN }}@github.com/dgtoan/motor_rental_shop.git
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
