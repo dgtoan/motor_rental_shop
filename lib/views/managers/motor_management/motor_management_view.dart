@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:motor_rental_shop/views/managers/motor_management/doSearchMotor.dart';
+import 'package:motor_rental_shop/views/managers/motor_management/search_motor_controller.dart';
 import 'package:motor_rental_shop/views/widgets/loading_view.dart';
 
 class MotorManagementView extends StatelessWidget {

@@ -3,15 +3,16 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:motor_rental_shop/models/user.dart';
 
 class ManagerView extends StatelessWidget {
   const ManagerView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final currentManager =
-        jsonDecode(window.sessionStorage['currentManager'] as String);
-    final fullname = currentManager['fullname'] as String;
+    final currentManager = User.fromJson(
+      jsonDecode(window.sessionStorage['currentManager'] as String),
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Manager View'),
@@ -31,7 +32,7 @@ class ManagerView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Welcome, $fullname',
+              'Welcome, ${currentManager.name}',
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

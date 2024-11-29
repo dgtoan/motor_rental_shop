@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motor_rental_shop/models/user.dart';
-import 'package:motor_rental_shop/views/users/doLogin.dart';
+import 'package:motor_rental_shop/views/users/login_controller.dart';
 import 'package:motor_rental_shop/views/widgets/custom_text_field.dart';
 import 'package:motor_rental_shop/views/widgets/loading_view.dart';
 
