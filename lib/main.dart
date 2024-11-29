@@ -1,9 +1,8 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motor_rental_shop/auth_middleware.dart';
 import 'package:motor_rental_shop/global_middleware.dart';
+import 'package:motor_rental_shop/services/session_storage_service.dart';
 import 'package:motor_rental_shop/views/managers/manager_view.dart';
 import 'package:motor_rental_shop/views/managers/motor_management/edit_motor_jnfo.dart';
 import 'package:motor_rental_shop/views/managers/motor_management/list_motor_view.dart';
@@ -31,7 +30,7 @@ class MainApp extends StatelessWidget {
       title: 'Motor Rental Shop',
       initialRoute: '/LoginView.dart',
       unknownRoute: () {
-        if (window.sessionStorage['currentManager'] != null) {
+        if (SessionStorageService.getCurrentUser() != null) {
           return GetPage(
               name: '/ManagerView.dart', page: () => const ManagerView());
         }

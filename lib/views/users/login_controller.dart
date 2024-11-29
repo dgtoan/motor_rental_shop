@@ -1,10 +1,8 @@
-import 'dart:convert';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motor_rental_shop/repositories/user_repository.dart';
 import 'package:motor_rental_shop/models/user.dart';
+import 'package:motor_rental_shop/services/session_storage_service.dart';
 
 class LoginController {
   final UserDAO userDAO = UserDAO();
@@ -23,8 +21,7 @@ class LoginController {
       return;
     }
 
-    window.sessionStorage['currentManager'] =
-        jsonEncode(currentManager.toJson());
+    SessionStorageService.setCurrentUser(currentManager);
     Get.offNamed('/ManagerView.dart');
   }
 }

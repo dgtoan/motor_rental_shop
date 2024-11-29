@@ -1,18 +1,13 @@
-import 'dart:convert';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:motor_rental_shop/models/user.dart';
+import 'package:motor_rental_shop/services/session_storage_service.dart';
 
 class ManagerView extends StatelessWidget {
   const ManagerView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final currentManager = User.fromJson(
-      jsonDecode(window.sessionStorage['currentManager'] as String),
-    );
+    final currentManager = SessionStorageService.getCurrentUser();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Manager View'),
@@ -20,7 +15,7 @@ class ManagerView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              window.sessionStorage.remove('currentManager');
+              SessionStorageService.removeCurrentUser();
               Get.offAllNamed('/LoginView.dart');
             },
           ),
@@ -32,7 +27,7 @@ class ManagerView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Welcome, ${currentManager.name}',
+              'Welcome, ${currentManager?.name}',
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
