@@ -1,5 +1,5 @@
 class SaveRevenueController {
-  Future<bool> call() async {
+  Future<bool> saveRevenue() async {
     return false;
   }
 }

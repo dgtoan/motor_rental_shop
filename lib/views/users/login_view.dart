@@ -81,7 +81,7 @@ class LoginView extends StatelessWidget {
                             child: FilledButton(
                               onPressed: () async {
                                 isLoading.value = true;
-                                await LoginController().call(User(
+                                await LoginController().login(User(
                                   email: emailController.text,
                                   password: passwordController.text,
                                 ));

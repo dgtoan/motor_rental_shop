@@ -4,12 +4,13 @@ import 'package:motor_rental_shop/repositories/motorbike_repository.dart';
 import 'package:motor_rental_shop/services/session_storage_service.dart';
 
 class SearchMotorController {
-  final MotorbikeRepository motorbikeDAO = MotorbikeRepository();
+  final MotorbikeRepository motorbikeRepository = MotorbikeRepository();
 
-  Future<void> call(String motorSearchName) async {
+  Future<void> searchMotor(String motorSearchName) async {
     SessionStorageService.setMotorSearchName(motorSearchName);
 
-    final listSearchMotorbike = await motorbikeDAO.searchMotor(motorSearchName);
+    final listSearchMotorbike =
+        await motorbikeRepository.searchMotor(motorSearchName);
 
     if (listSearchMotorbike == null) {
       Get.snackbar(

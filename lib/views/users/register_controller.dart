@@ -5,10 +5,10 @@ import 'package:motor_rental_shop/services/session_storage_service.dart';
 import 'package:motor_rental_shop/views/widgets/app_alert.dart';
 
 class RegisterController {
-  final UserRepository userDAO = UserRepository();
+  final UserRepository userRepository = UserRepository();
 
-  Future<void> call(User user) async {
-    final result = await userDAO.create(user);
+  Future<void> register(User user) async {
+    final result = await userRepository.register(user);
 
     result.fold(
       (newUser) {

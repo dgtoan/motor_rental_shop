@@ -12,7 +12,7 @@ class MotorManagementView extends StatelessWidget {
   Future<void> onSearch(String motorSearchName) async {
     isLoading.value = true;
     debugPrint('Searching for $motorSearchName');
-    await SearchMotorController().call(motorSearchName);
+    await SearchMotorController().searchMotor(motorSearchName);
     isLoading.value = false;
   }
 

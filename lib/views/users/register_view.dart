@@ -123,7 +123,7 @@ class RegisterView extends StatelessWidget {
                                   isLoading.value = false;
                                   return;
                                 }
-                                await RegisterController().call(User(
+                                await RegisterController().register(User(
                                   name: fullnameController.text,
                                   email: emailController.text,
                                   username: usernameController.text,

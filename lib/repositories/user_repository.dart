@@ -6,7 +6,7 @@ import 'package:motor_rental_shop/models/user.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class UserRepository extends PocketBaseService {
-  Future<Either<User, String>> checkLogin(User user) async {
+  Future<Either<User, String>> login(User user) async {
     final email = user.email;
     final password = user.password;
 
@@ -30,7 +30,7 @@ class UserRepository extends PocketBaseService {
     }
   }
 
-  Future<Either<User, String>> create(User user) async {
+  Future<Either<User, String>> register(User user) async {
     if (user.email == null ||
         user.password == null ||
         user.name == null ||

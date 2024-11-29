@@ -1,5 +1,5 @@
 class SaveContractController {
-  Future<bool> call() async {
+  Future<bool> saveContract() async {
     return false;
   }
 }

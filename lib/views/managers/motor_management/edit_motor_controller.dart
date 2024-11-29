@@ -1,5 +1,5 @@
 class EditMotorController {
-  Future<bool> call() async {
+  Future<bool> updateMotor() async {
     return false;
   }
 }
