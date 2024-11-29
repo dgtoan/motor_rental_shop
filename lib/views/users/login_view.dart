@@ -44,17 +44,20 @@ class LoginView extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                          SizedBox(
+                            width: double.infinity,
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 24),
                           CustomTextField(
                             controller: emailController,
-                            label: 'Email',
+                            label: 'Username or Email',
                           ),
                           const SizedBox(height: 16),
                           CustomTextField(
