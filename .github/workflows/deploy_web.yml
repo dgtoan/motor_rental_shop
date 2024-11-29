@@ -28,17 +28,17 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.24.4
+      # - run: flutter --version
       - name: Create dotenv file
         if: env.API_URL != ''
         run: echo "API_URL=${{ env.API_URL }}" > dotenv
-      - run: flutter --version
       - name: Build web
         run: |
           flutter pub get
           flutter build web --release --web-renderer html --base-href /motor_rental_shop/
       - name: Deploy
         run: |
-          rm -rm .git
+          rm -rf .git
           cd build/web
           git init
           git config --global user.email toandv@zyyx.jp
