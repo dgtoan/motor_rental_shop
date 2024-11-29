@@ -33,6 +33,6 @@ Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
     };
 
 const _$UserRoleEnumMap = {
-  UserRole.manager: 'Manager',
-  UserRole.customer: 'Customer',
+  UserRole.manager: 'manager',
+  UserRole.customer: 'customer',
 };

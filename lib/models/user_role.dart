@@ -1,8 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+@JsonEnum()
 enum UserRole {
-  @JsonValue('Manager')
   manager,
-  @JsonValue('Customer')
   customer;
 }
