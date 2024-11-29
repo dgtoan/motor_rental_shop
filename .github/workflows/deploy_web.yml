@@ -32,9 +32,13 @@ jobs:
         if: env.API_URL != ''
         run: echo "API_URL=${{ env.API_URL }}" > dotenv
       - run: flutter --version
-      - run: flutter pub get
-      - run: flutter build web --release --web-renderer html --base-href /motor_rental_shop/
-      - run: |
+      - name: Build web
+        run: |
+          flutter pub get
+          flutter build web --release --web-renderer html --base-href /motor_rental_shop/
+      - name: Deploy
+        run: |
+          rm -rm .git
           cd build/web
           git init
           git config --global user.email toandv@zyyx.jp
