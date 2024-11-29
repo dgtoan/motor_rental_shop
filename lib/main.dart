@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:motor_rental_shop/auth_middleware.dart';
 import 'package:motor_rental_shop/global_middleware.dart';
@@ -17,7 +18,8 @@ import 'package:motor_rental_shop/views/managers/sign_contract/search_contract_v
 import 'package:motor_rental_shop/views/users/login_view.dart';
 import 'package:motor_rental_shop/views/users/register_view.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: 'dotenv');
   runApp(const MainApp());
 }
 
