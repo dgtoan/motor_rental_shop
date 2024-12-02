@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:motor_rental_shop/auth_middleware.dart';
-import 'package:motor_rental_shop/global_middleware.dart';
 import 'package:motor_rental_shop/services/session_storage_service.dart';
 import 'package:motor_rental_shop/views/managers/manager_view.dart';
 import 'package:motor_rental_shop/views/managers/motor_management/edit_motor_jnfo.dart';
@@ -17,9 +15,11 @@ import 'package:motor_rental_shop/views/managers/sign_contract/list_contract_vie
 import 'package:motor_rental_shop/views/managers/sign_contract/search_contract_view.dart';
 import 'package:motor_rental_shop/views/users/login_view.dart';
 import 'package:motor_rental_shop/views/users/register_view.dart';
+import 'package:motor_rental_shop/scaffold_with_nav.dart';
 
 Future main() async {
   await dotenv.load(fileName: 'dotenv');
+  Get.put(NavController());
   runApp(const MainApp());
 }
 
@@ -30,14 +30,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Motor Rental Shop',
+      defaultTransition: Transition.noTransition,
+      transitionDuration: const Duration(milliseconds: 0),
       initialRoute: '/LoginView.dart',
-      unknownRoute: () {
-        if (SessionStorageService.getCurrentUser() != null) {
-          return GetPage(
-              name: '/ManagerView.dart', page: () => const ManagerView());
-        }
-        return GetPage(name: '/LoginView.dart', page: () => LoginView());
-      }(),
       getPages: [
         GetPage(
           name: '/LoginView.dart',
@@ -110,6 +105,95 @@ class MainApp extends StatelessWidget {
           seedColor: Colors.blue,
         ),
       ),
+      navigatorObservers: [
+        MyNavigatorObserver(),
+      ],
+      builder: (context, child) {
+        return ScaffoldWithNav(
+          child: child ?? const SizedBox(),
+        );
+      },
     );
+  }
+}
+
+class AuthMiddleware extends GetMiddleware {
+  @override
+  RouteSettings? redirect(String? route) {
+    return SessionStorageService.getCurrentUser() != null
+        ? const RouteSettings(name: '/ManagerView.dart')
+        : null;
+  }
+}
+
+class GlobalMiddleware extends GetMiddleware {
+  @override
+  RouteSettings? redirect(String? route) {
+    return SessionStorageService.getCurrentUser() == null
+        ? const RouteSettings(name: '/LoginView.dart')
+        : null;
+  }
+}
+
+
+
+class MyNavigatorObserver extends GetObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
+    updateNav(route.settings.name);
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    super.didPop(route, previousRoute);
+    updateNav(previousRoute?.settings.name);
+  }
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    updateNav(newRoute?.settings.name);
+  }
+
+  @override
+  void didRemove(Route route, Route? previousRoute) {
+    super.didRemove(route, previousRoute);
+    updateNav(previousRoute?.settings.name);
+  }
+
+  void updateNav(String? routeName) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      debugPrint('Current route: $routeName');
+      final controller = Get.find<NavController>();
+      final index = getRouteIndex(routeName);
+      controller.selectedIndex.value = index;
+      if (index != 4) {
+        controller.showDrawer.value = true;
+      } else {
+        controller.showDrawer.value = false;
+      }
+    });
+  }
+
+  int getRouteIndex(String? routeName) {
+    if (routeName?.startsWith('/ManagerView.dart') == true) {
+      return 0;
+    } else if (routeName?.startsWith('/MotorManagementView.dart') == true ||
+        routeName?.startsWith('/ListMotorView.dart') == true ||
+        routeName?.startsWith('/EditMotorInfo.dart') == true) {
+      return 1;
+    } else if (routeName?.startsWith('/SearchContractView.dart') == true ||
+        routeName?.startsWith('/ListContractView.dart') == true ||
+        routeName?.startsWith('/ContractDetailView.dart') == true ||
+        routeName?.startsWith('/ConfirmSaveContractView.dart') == true) {
+      return 2;
+    } else if (routeName?.startsWith('/RevenueFilterView.dart') == true ||
+        routeName?.startsWith('/ListRevenueView.dart') == true ||
+        routeName?.startsWith('/RevenueDetailView.dart') == true) {
+      return 3;
+    }
+
+    return 4;
   }
 }
