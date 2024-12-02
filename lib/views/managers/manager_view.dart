@@ -20,56 +20,68 @@ class ManagerView extends StatelessWidget {
           children: [
             Text(
               'Welcome, ${currentManager?.name}',
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
+            const SizedBox(height: 16),
             Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.toNamed('/MotorManagementView.dart');
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Motor Management',
-                          style: TextStyle(fontSize: 18),
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed('/MotorManagementView.dart');
+                    },
+                    borderRadius: BorderRadius.circular(10),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            'Motor Management',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.toNamed('/SearchContractView.dart');
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Sign Contract',
-                          style: TextStyle(fontSize: 18),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed('/SearchContractView.dart');
+                    },
+                    borderRadius: BorderRadius.circular(10),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            'Sign Contract',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.toNamed('/RevenueFilterView.dart');
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Revenue',
-                          style: TextStyle(fontSize: 18),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed('/RevenueFilterView.dart');
+                    },
+                    borderRadius: BorderRadius.circular(10),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            'Revenue Statistics',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             )
           ],
