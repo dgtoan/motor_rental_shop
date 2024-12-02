@@ -11,15 +11,7 @@ class ManagerView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Manager View'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              SessionStorageService.removeCurrentUser();
-              Get.offAllNamed('/LoginView.dart');
-            },
-          ),
-        ],
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
