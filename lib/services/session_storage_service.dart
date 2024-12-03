@@ -10,6 +10,8 @@ class SessionStorageService {
   static final String currentUserKey = 'currentUser';
   static final String motorSearchNameKey = 'motorSearchName';
   static final String listSearchMotorbikeKey = 'listSearchMotorbike';
+  static final String editMotorIdKey = 'editMotorId';
+  static final String currentEditMotorKey = 'currentEditMotorId';
 
   // ############################ Current User ############################
   static User? getCurrentUser() {
@@ -60,5 +62,36 @@ class SessionStorageService {
 
   static void removeListSearchMotorbike() {
     sessionStorage.remove(listSearchMotorbikeKey);
+  }
+
+  // ########################### Edit Motor ID ###########################
+  static String? getEditMotorId() {
+    return sessionStorage[editMotorIdKey];
+  }
+
+  static void setEditMotorId(String editMotorId) {
+    sessionStorage[editMotorIdKey] = editMotorId;
+  }
+
+  static void removeEditMotorId() {
+    sessionStorage.remove(editMotorIdKey);
+  }
+
+  // ######################### Current Edit Motor #########################
+  static Motorbike? getCurrentEditMotor() {
+    final currentEditMotor = sessionStorage[currentEditMotorKey];
+    if (currentEditMotor == null) {
+      return null;
+    }
+
+    return Motorbike.fromJson(jsonDecode(currentEditMotor));
+  }
+
+  static void setCurrentEditMotor(Motorbike motorbike) {
+    sessionStorage[currentEditMotorKey] = jsonEncode(motorbike.toJson());
+  }
+
+  static void removeCurrentEditMotor() {
+    sessionStorage.remove(currentEditMotorKey);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:motor_rental_shop/services/session_storage_service.dart';
 import 'package:motor_rental_shop/views/managers/manager_view.dart';
-import 'package:motor_rental_shop/views/managers/motor_management/edit_motor_jnfo.dart';
+import 'package:motor_rental_shop/views/managers/motor_management/motor_info_view.dart';
 import 'package:motor_rental_shop/views/managers/motor_management/list_motor_view.dart';
 import 'package:motor_rental_shop/views/managers/motor_management/motor_management_view.dart';
 import 'package:motor_rental_shop/views/managers/revenue_statistic/list_revenue_view.dart';
@@ -61,7 +61,12 @@ class MainApp extends StatelessWidget {
         ),
         GetPage(
           name: '/EditMotorInfo.dart',
-          page: () => const EditMotorInfo(),
+          page: () => MotorInfoView(type: MotorInfoType.update),
+          middlewares: [GlobalMiddleware()],
+        ),
+        GetPage(
+          name: '/AddMotor.dart',
+          page: () => MotorInfoView(type: MotorInfoType.create),
           middlewares: [GlobalMiddleware()],
         ),
         GetPage(
@@ -135,8 +140,6 @@ class GlobalMiddleware extends GetMiddleware {
   }
 }
 
-
-
 class MyNavigatorObserver extends GetObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
@@ -181,7 +184,8 @@ class MyNavigatorObserver extends GetObserver {
       return 0;
     } else if (routeName?.startsWith('/MotorManagementView.dart') == true ||
         routeName?.startsWith('/ListMotorView.dart') == true ||
-        routeName?.startsWith('/EditMotorInfo.dart') == true) {
+        routeName?.startsWith('/EditMotorInfo.dart') == true ||
+        routeName?.startsWith('/AddMotor.dart') == true) {
       return 1;
     } else if (routeName?.startsWith('/SearchContractView.dart') == true ||
         routeName?.startsWith('/ListContractView.dart') == true ||
@@ -192,6 +196,8 @@ class MyNavigatorObserver extends GetObserver {
         routeName?.startsWith('/ListRevenueView.dart') == true ||
         routeName?.startsWith('/RevenueDetailView.dart') == true) {
       return 3;
+    } else if (routeName == null) {
+      return -1;
     }
 
     return 4;
