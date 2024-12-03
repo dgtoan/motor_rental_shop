@@ -9,7 +9,7 @@ class ContractRepository extends PocketBaseService {
       String customerSearchName) async {
     try {
       final records = await con.collection('contracts').getFullList(
-            filter: 'customer.name ~ "$customerSearchName", status = "pending"',
+            filter: 'customer.name ~ "$customerSearchName" && status = "pending"',
             expand: 'customer, manager, listMotorbikeContract.motorbike',
             fields: 'id, status, expand.*, created, updated',
           );
