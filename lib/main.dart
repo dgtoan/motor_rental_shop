@@ -71,7 +71,7 @@ class MainApp extends StatelessWidget {
         ),
         GetPage(
           name: '/SearchContractView.dart',
-          page: () => const SearchContractView(),
+          page: () => SearchContractView(),
           middlewares: [GlobalMiddleware()],
         ),
         GetPage(

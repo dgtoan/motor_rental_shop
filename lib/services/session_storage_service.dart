@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:motor_rental_shop/models/motorbike.dart';
 import 'package:motor_rental_shop/models/user.dart';
+import 'package:motor_rental_shop/models/contract.dart';
 
 class SessionStorageService {
   static final sessionStorage = window.sessionStorage;
@@ -12,6 +13,8 @@ class SessionStorageService {
   static final String listSearchMotorbikeKey = 'listSearchMotorbike';
   static final String editMotorIdKey = 'editMotorId';
   static final String currentEditMotorKey = 'currentEditMotorId';
+  static final String listSearchContractKey = 'listSearchContract';
+  static final String customerSearchNameKey = 'customerSearchName';
 
   // ############################ Current User ############################
   static User? getCurrentUser() {
@@ -93,5 +96,38 @@ class SessionStorageService {
 
   static void removeCurrentEditMotor() {
     sessionStorage.remove(currentEditMotorKey);
+  }
+
+  // ######################### List Search Contract #########################
+  static List<Contract>? getListSearchContract() {
+    final listSearchContract = sessionStorage[listSearchContractKey];
+    if (listSearchContract == null) {
+      return null;
+    }
+
+    final list = jsonDecode(listSearchContract)['items'] as List;
+    return list.map((e) => Contract.fromJson(e)).toList();
+  }
+
+  static void setListSearchContract(List<Contract> listSearchContract) {
+    final listJson = listSearchContract.map((e) => e.toJson()).toList();
+    sessionStorage[listSearchContractKey] = jsonEncode({'items': listJson});
+  }
+
+  static void removeListSearchContract() {
+    sessionStorage.remove(listSearchContractKey);
+  }
+
+  // ######################### Customer Search Name #########################
+  static String? getCustomerSearchName() {
+    return sessionStorage[customerSearchNameKey];
+  }
+
+  static void setCustomerSearchName(String customerSearchName) {
+    sessionStorage[customerSearchNameKey] = customerSearchName;
+  }
+
+  static void removeCustomerSearchName() {
+    sessionStorage.remove(customerSearchNameKey);
   }
 }
